@@ -51,7 +51,8 @@ if __name__ == '__main__':
 - Set **Minimum instance count: 1**, **Maximum instance count: 3**, and **Default instance count: 1**.
 
 **Example Autoscale Settings:**  
-![Autoscale Setting](./Screenshot%202025-02-18%20at%2015.26.44.png)
+<img width="1147" alt="Screenshot 2025-02-18 at 15 33 58" src="https://github.com/user-attachments/assets/475306b2-b69b-4a82-b27f-c0f1a59cef42" />
+
 
 ### 6. Simulate High Traffic
 Open your terminal and run the following command to simulate continuous requests:
@@ -59,14 +60,16 @@ Open your terminal and run the following command to simulate continuous requests
 while true; do curl https://my-laflask-app.azurewebsites.net/; done
 ```
 **Example Traffic Simulation:**  
-![Traffic Simulation](./Screenshot%202025-02-18%20at%2015.27.55.png)
+<img width="565" alt="Screenshot 2025-02-18 at 15 27 55" src="https://github.com/user-attachments/assets/74d719dc-7b00-4233-a3bb-e17ffbe732cd" />
+
 
 ### 7. Monitor Metrics
 - In the Azure Portal, go to **App Service Plan > Metrics**.
 - Track **CPU Percentage** to observe scaling behavior.
 
 **Example CPU Spike:**  
-![CPU Metrics](./Screenshot%202025-02-18%20at%2015.33.58.png)
+<img width="1153" alt="Screenshot 2025-02-18 at 15 26 44" src="https://github.com/user-attachments/assets/c57b2e7a-546d-42b6-9c2f-9b136caf18b1" />
+
 
 ## Contributing
 Contributions are welcome! Please follow these steps:
