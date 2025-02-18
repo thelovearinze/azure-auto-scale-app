@@ -1,6 +1,6 @@
 # Azure Auto-Scaling Flask App
 
-This project is a simple Flask application deployed to Azure App Services with auto-scaling enabled based on CPU utilization. It demonstrates how to configure Azure App Services to automatically scale the number of instances based on demand.
+This project is a simple Flask application deployed to Azure App Services with auto-scaling enabled. It demonstrates how to configure Azure App Services to automatically scale the number of instances based on CPU utilization.
 
 ## Features
 - Flask web application with a simple message response.
@@ -34,73 +34,58 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Hello from Azure Auto-Scaling Flask App!"
+    return 'Hello from Azure Auto-Scaling Flask App!'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### 4. Deploy to Azure
-- Create a Resource Group: `az group create --name LAResourceGroup --location uksouth`
-- Create an App Service Plan: `az appservice plan create --name LAAppServicePlan --resource-group LAResourceGroup --sku S1 --is-linux`
-- Create a Web App: `az webapp create --resource-group LAResourceGroup --plan LAAppServicePlan --name my-laflask-app --runtime "PYTHON|3.9"`
+### 4. Deploy to Azure App Services
+- Create an Azure App Service Plan and a Web App.
+- Deploy the Flask app to the Azure Web App using GitHub Actions or Azure CLI.
 
-### 5. Deploy Flask App
-```bash
-az webapp up --name my-laflask-app --resource-group LAResourceGroup --runtime "PYTHON|3.9"
-```
+### 5. Configure Auto-Scaling
+- Navigate to the App Service Plan in the Azure Portal.
+- Select **Scale out (App Service plan)**.
+- Choose **Custom autoscale** and add scale-out and scale-in rules based on CPU utilization (e.g., scale out when CPU > 70%, scale in when CPU < 30%).
+- Set **Minimum instance count: 1**, **Maximum instance count: 3**, and **Default instance count: 1**.
 
-### 6. Enable Auto-Scaling
-- Assign "Monitoring Contributor" Role using Azure CLI.
-- Create an auto-scaling setting for the App Service Plan with minimum 1 instance, maximum 3 instances, and a default of 1 instance.
-- Add scale-out rule: Increase instance count by 1 when CPU > 70%.
-- Add scale-in rule: Decrease instance count by 1 when CPU < 30%.
+**Example Autoscale Settings:**  
+![Autoscale Setting](./Screenshot%202025-02-18%20at%2015.26.44.png)
 
-### 7. Test Auto-Scaling
-Simulate load:
+### 6. Simulate High Traffic
+Open your terminal and run the following command to simulate continuous requests:
 ```bash
 while true; do curl https://my-laflask-app.azurewebsites.net/; done
 ```
-Monitor CPU usage on Azure Portal (App Service Plan -> Metrics -> CPU Percentage).
+**Example Traffic Simulation:**  
+![Traffic Simulation](./Screenshot%202025-02-18%20at%2015.27.55.png)
 
-## GitHub Integration
+### 7. Monitor Metrics
+- In the Azure Portal, go to **App Service Plan > Metrics**.
+- Track **CPU Percentage** to observe scaling behavior.
 
-### 1. Initialize Git
-```bash
-git init
-git add .
-git commit -m "Initial commit - Azure auto-scaling Flask app"
-```
-
-### 2. Create GitHub Repository
-Create a repository on GitHub and obtain the repository URL.
-
-### 3. Push to GitHub
-```bash
-git remote add origin https://github.com/your-username/azure-auto-scale-app.git
-git branch -M main
-git push -u origin main
-```
-
-**Note:** Use a Personal Access Token (PAT) instead of a password if prompted.
+**Example CPU Spike:**  
+![CPU Metrics](./Screenshot%202025-02-18%20at%2015.33.58.png)
 
 ## Contributing
 Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
 2. Create a feature branch:
-    ```bash
-    git checkout -b feature-branch-name
-    ```
+   ```bash
+   git checkout -b feature-branch-name
+   ```
 3. Commit your changes:
-    ```bash
-    git commit -m "Add new feature"
-    ```
+   ```bash
+   git commit -m "Add new feature"
+   ```
 4. Push to your fork:
-    ```bash
-    git push origin feature-branch-name
-    ```
+   ```bash
+   git push origin feature-branch-name
+   ```
 5. Open a Pull Request.
 
 ## License
 This project is licensed under the MIT License.
+
