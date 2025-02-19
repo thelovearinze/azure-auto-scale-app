@@ -18,7 +18,7 @@ This project is a simple Flask application deployed to Azure App Services with a
 ### 1. Create a Virtual Environment
 ```bash
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate   # For Windows: venv\Scripts\activate
 ```
 
 ### 2. Install Required Packages
